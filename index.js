@@ -1,44 +1,8 @@
-const express   = require('express');
-const mongoose  = require('mongoose');
-const Id  = require('mongoose').ObjectID;
-const app   = express();
+const app = require('express')();
+const PORT = process.env.PORT || process.argv[2] || 8080; // Порт берётся из окружения, либо из аргументов командной строки (npm start порт || npm run dev порт), иначе - дефолт 8080
 
-mongoose.connect('mongodb://localhost/people');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    app.listen(3000, function(){
-    console.log('ready');
-    });
-});
+// Обработка запросов находится в отдельном модуле(маршрутизаторе)
+require('./routes')(app);
 
-
-
-
-
-
-let Schema = new mongoose.Schema({ 
-    name:{
-    type: String,
-    unique: true
-    }
-});
-
-let server = mongoose.model('people',Schema);
-
-app.get('/', (req, res) =>{ 
-    res.send('123');
-});
-
-app.get('/api/user/',(req, res) =>{ 
-    server.find({},function(err,docs){
-        if(err){
-            console.log(err)
-            return res.status(500);
-        }
-        res.send(docs);
-    })
-});
-
-
-
+// Запуск сервера
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

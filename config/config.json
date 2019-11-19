@@ -1,0 +1,12 @@
+{
+	"mongoose": {
+		"uri": "mongodb://localhost/test",
+		"options": {
+			"useNewUrlParser": true,
+			"useFindAndModify": false,
+			"useUnifiedTopology": true,
+			"useCreateIndex": true,
+			"keepAlive": 1
+		}
+	}
+}
