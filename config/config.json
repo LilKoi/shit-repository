@@ -1,6 +1,6 @@
 {
 	"mongoose": {
-		"uri": "mongodb://localhost/test",
+		"uri": "mongodb://localhost/people",
 		"options": {
 			"useNewUrlParser": true,
 			"useFindAndModify": false,

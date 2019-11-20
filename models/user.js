@@ -1,12 +1,22 @@
-const mongoose = require('../lib/mongoose'); // подключаем соединение(должно быть одно для всех)
+const mongoose = require('../lib/mongoose');
 const { Schema } = mongoose;
 
 const schema = new Schema({
 	name: {
-		type: String, // тип поля - строка
-		unique: true, // уникальное поле
-		required: true // требуется для вставки
+		type: String,
+		unique: true,
+		required: true
 	}
 });
 
-exports.User = mongoose.model('User', schema);
+schema.statics.add = async ({ name }) => {
+	const id = await User.countDocuments({}) + 1;
+	const user = new User({
+		categoryid: id,
+		name: name
+	});
+
+	return user.save();
+} 
+
+const User = exports.User = mongoose.model('People', schema);
