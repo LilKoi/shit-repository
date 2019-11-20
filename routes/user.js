@@ -1,11 +1,6 @@
 const { User } = require('../models/user');
 
 exports.get = async (req, res) => {
-  const users = await User.find({}).exec();
-  res.send({ users });
-}
-
-exports.get = async (req, res) => {
   try {
     const categoryid = +req.params.id;
     const { name } = await User.findOne({ categoryid }).exec();
