@@ -2,13 +2,11 @@ const { User } = require('../models/user');
 
 exports.get = async (req, res) => {
   try {
-    const categoryid = +req.params.id;
-    const { name } = await User.findOne({ categoryid }).exec();
-
-    res.send(name);
+    const user = await User.findOne({id:req.params.id});
+    res.send({user});
   } catch(err){
     const users = await User.find({}).exec();
-    res.send({ users });
+    res.send();
   }
 }
 
