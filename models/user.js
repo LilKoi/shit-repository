@@ -4,7 +4,14 @@ const { Schema } = mongoose;
 const schema = new Schema({
 	name: {
 		type: String,
-		unique: true,
+		required: true
+	},
+	lastname: {
+		type: String,
+		required: true
+	},
+	city: {
+		type: String,
 		required: true
 	}
 });
@@ -12,8 +19,9 @@ const schema = new Schema({
 schema.statics.add = async ({ name }) => {
 	const id = await User.countDocuments({}) + 1;
 	const user = new User({
-		categoryid: id,
-		name: name
+		name: name,
+		lastname: lastname,
+		city: city
 	});
 
 	return user.save();
